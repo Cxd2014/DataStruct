@@ -190,3 +190,57 @@ int ReplaceQString(QString *str,char *s,char *t)
 	}
 	return TRUE;
 }
+
+/* 求模式串 T 的 next 函数值，存入数组 next 中 */
+void GetNext(QString *str,int next[])
+{
+	int i = 1;
+	next[1] = 0;
+	int j = 0;
+	while(i < str->length){
+		if(j == 0 || str->ch[i] == str->ch[j]){
+			i++;
+			j++;
+			if(str->ch[i] != str->ch[j])
+				next[i] = j;
+			else
+				next[i] == next[j];
+		}else
+			j = next[j];
+	}
+	/*
+	for(i=0;i<(str->length);i++)
+		printf("%d ",next[i]);
+	printf("\n");
+	*/
+}
+
+/* KMP算法实现字符串查找 */
+// 参考 http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html
+int KMPIndexQString(QString *str,char *s,int pos)
+{
+	QString *T;
+	int *next;
+	int i = pos;
+	int j = 1;
+	T = InitQString(s);
+	InsertQString(T,0," ");
+	InsertQString(str,0," ");
+
+	next = (int *)malloc((T->length)*sizeof(int));
+	if(next == NULL)
+		return ERROR;
+	GetNext(T,next); //得到模式串的 next 函数
+	
+	while(i<=(str->length-1) && j<=(T->length-1)){
+		if(j==0 || str->ch[i]==T->ch[j]){
+			i++;
+			j++;
+		}else
+			j = next[j];
+	}
+	if(j > T->length - 1)
+		return (i - T->length);
+	else
+		return ERROR;
+}

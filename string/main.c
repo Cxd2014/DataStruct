@@ -37,6 +37,9 @@ int main(int argc, char const *argv[])
 	ReplaceQString(str1,"After","cxd");
 	PrintQString(str1);
 
+	err = KMPIndexQString(str1,"Eff",0);
+	printf("postion = %d\n",err);
+
 	ClearQString(mid);
 	ClearQString(str2);
 	ClearQString(str1);

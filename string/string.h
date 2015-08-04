@@ -36,3 +36,7 @@ int IndexQString(QString *str,char *S,int pos);
 
 /* 串替换 将串 str 中的串 s 替换为串 t 成功返回TRUE 失败返回 ERROR */
 int ReplaceQString(QString *str,char *s,char *t);
+
+/* KMP算法实现字符串查找 */
+//参考 http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html
+int KMPIndexQString(QString *str,char *s,int pos);
