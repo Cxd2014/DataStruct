@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "string.h"
+#include "QString.h"
 
 int main(int argc, char const *argv[])
 {
@@ -37,7 +37,7 @@ int main(int argc, char const *argv[])
 	ReplaceQString(str1,"After","cxd");
 	PrintQString(str1);
 
-	err = KMPIndexQString(str1,"Eff",0);
+	err = KMPIndexQString(str1,"cxd",0);
 	printf("postion = %d\n",err);
 
 	ClearQString(mid);

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "string.h"
+#include <string.h>
+#include "QString.h"
 
 /* 串的初始化 成功返回串的指针，失败返回 NULL*/
 QString *InitQString(char *s)
@@ -192,25 +193,26 @@ int ReplaceQString(QString *str,char *s,char *t)
 }
 
 /* 求模式串 T 的 next 函数值，存入数组 next 中 */
-void GetNext(QString *str,int next[])
+void GetNext(char *str,int next[])
 {
-	int i = 1;
-	next[1] = 0;
+	int len = strlen(str);
+	next[0] = -1;
+	int k = -1;
 	int j = 0;
-	while(i < str->length){
-		if(j == 0 || str->ch[i] == str->ch[j]){
-			i++;
+	while(j < len - 1){
+		if(k == -1 || str[j] == str[k]){
+			k++;
 			j++;
-			if(str->ch[i] != str->ch[j])
-				next[i] = j;
+			if(str[j] != str[k])
+				next[j] = k;
 			else
-				next[i] == next[j];
+				next[j] = next[k];
 		}else
-			j = next[j];
+			k = next[k];
 	}
 	/*
-	for(i=0;i<(str->length);i++)
-		printf("%d ",next[i]);
+	for(j=0;j<len;j++)
+		printf("%d ",next[j]);
 	printf("\n");
 	*/
 }
@@ -219,28 +221,26 @@ void GetNext(QString *str,int next[])
 // 参考 http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html
 int KMPIndexQString(QString *str,char *s,int pos)
 {
-	QString *T;
+	int i=0,j=0;
 	int *next;
-	int i = pos;
-	int j = 1;
-	T = InitQString(s);
-	InsertQString(T,0," ");
-	InsertQString(str,0," ");
+	int slen = strlen(s);
 
-	next = (int *)malloc((T->length)*sizeof(int));
+	next = (int *)malloc(slen*sizeof(int));
 	if(next == NULL)
 		return ERROR;
-	GetNext(T,next); //得到模式串的 next 函数
-	
-	while(i<=(str->length-1) && j<=(T->length-1)){
-		if(j==0 || str->ch[i]==T->ch[j]){
+	GetNext(s,next); //得到模式串的 next 函数
+
+	while(i<(str->length) && j<slen){
+
+		if(j == -1 || str->ch[i]==s[j]){
 			i++;
 			j++;
 		}else
 			j = next[j];
 	}
-	if(j > T->length - 1)
-		return (i - T->length);
+	if(j == slen)
+		return (i - j);
 	else
 		return ERROR;
+
 }

@@ -1,4 +1,4 @@
-/* 串的基本操作 */
+/* 串的基本操作 利用堆分配存储串*/
 #define ERROR -1
 #define TRUE  1
 
@@ -40,3 +40,6 @@ int ReplaceQString(QString *str,char *s,char *t);
 /* KMP算法实现字符串查找 */
 //参考 http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html
 int KMPIndexQString(QString *str,char *s,int pos);
+
+/* 求模式串 T 的 next 函数值，存入数组 next 中 */
+void GetNext(char *str,int next[]);
