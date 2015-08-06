@@ -1,7 +1,7 @@
 CC       = gcc
 OBJ      = tree
 
-objs := tree.o main.o 
+objs := stack.o tree.o main.o
 
 ${OBJ}:$(objs)
 	${CC} -o ${OBJ} ${objs}
