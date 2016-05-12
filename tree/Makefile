@@ -1,13 +1,14 @@
 CC       = gcc
 OBJ      = tree
+FLAGS    = -c -g
 
-objs := stack.o tree.o main.o
+objs := main.o stack.o tree.o 
 
 ${OBJ}:$(objs)
 	${CC} -o ${OBJ} ${objs}
 
 %.o:%.c
-	${CC} -c -g $< -o $@
+	${CC} ${FLAGS} $< -o $@
 
 .PHONY : clean
 clean:

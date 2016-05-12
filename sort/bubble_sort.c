@@ -29,7 +29,7 @@ int bubble_sort(int *a,int num)
 		flag = 0;
 		for (j = 0; j < (num-i-1);j++)
 		{
-			if(a[j+1]<a[j]){
+			if(a[j+1]>a[j]){
 				SWAP(a[j+1],a[j]);
 				flag = 1;
 			}

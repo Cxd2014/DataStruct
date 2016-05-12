@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "tree.h"
-#include "stack.h"
+#include "stk.h"
 
 /* 按先序次序创建二叉树，成功返回二叉树指针，失败返回 NULL */
 struct Tree *CreateTree(ElemType *ch)

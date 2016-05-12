@@ -61,7 +61,7 @@ void InsertList(struct Node * pHead,int i,int val)
 
 	while(p && (j<i-1)) { //寻找第 i-1 个节点
 		p = p->Next;
-		++j;
+		j++;
 	}
 
 	if(!p || (j > i-1)) {
